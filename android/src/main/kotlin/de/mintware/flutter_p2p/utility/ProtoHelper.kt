@@ -11,6 +11,7 @@
 package de.mintware.flutter_p2p.utility
 
 import android.net.NetworkInfo
+import android.net.wifi.p2p.WifiP2pGroup
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pInfo
 import android.net.wifi.p2p.WifiP2pManager
@@ -29,6 +30,14 @@ class ProtoHelper {
             return Protos.DiscoveryStateChange.newBuilder()
                     .setIsDiscovering(discoveryState != WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED)
                     .build();
+        }
+
+        fun create(group: WifiP2pGroup) : Protos.WifiP2pGroup {
+            if(group.owner ==null) return Protos.WifiP2pGroup.newBuilder().build()
+            return Protos.WifiP2pGroup.newBuilder()
+                    .setOwner( create( group.owner )  )
+                    .setClientList( create ( group.clientList ) )
+                    .build()
         }
 
         fun create(device: WifiP2pDevice): Protos.WifiP2pDevice {
@@ -52,10 +61,17 @@ class ProtoHelper {
                     .build()
         }
 
-        fun create(p2pInfo: WifiP2pInfo, networkInfo: NetworkInfo): Protos.ConnectionChange {
+        fun create(devices: Collection<WifiP2pDevice>): Protos.WifiP2pDeviceList {
+            return Protos.WifiP2pDeviceList.newBuilder()
+                    .addAllDevices(devices.map(Companion::create))
+                    .build()
+        }
+
+        fun create(p2pInfo: WifiP2pInfo, networkInfo: NetworkInfo, group: WifiP2pGroup): Protos.ConnectionChange {
             return Protos.ConnectionChange.newBuilder()
                     .setWifiP2PInfo(create(p2pInfo))
                     .setNetworkInfo(create(networkInfo))
+                    .setGroupInfo(create(group))
                     .build()
         }
 

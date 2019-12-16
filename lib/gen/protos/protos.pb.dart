@@ -248,6 +248,65 @@ class WifiP2pDeviceList extends $pb.GeneratedMessage {
   $core.List<WifiP2pDevice> get devices => $_getList(0);
 }
 
+class WifiP2pGroup extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i =
+      $pb.BuilderInfo('WifiP2pGroup', createEmptyInstance: create)
+        ..aOM<WifiP2pDevice>(1, 'owner', subBuilder: WifiP2pDevice.create)
+        ..aOM<WifiP2pDeviceList>(2, 'clientList',
+            protoName: 'clientList', subBuilder: WifiP2pDeviceList.create)
+        ..hasRequiredFields = false;
+
+  WifiP2pGroup._() : super();
+  factory WifiP2pGroup() => create();
+  factory WifiP2pGroup.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory WifiP2pGroup.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  WifiP2pGroup clone() => WifiP2pGroup()..mergeFromMessage(this);
+  WifiP2pGroup copyWith(void Function(WifiP2pGroup) updates) =>
+      super.copyWith((message) => updates(message as WifiP2pGroup));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static WifiP2pGroup create() => WifiP2pGroup._();
+  WifiP2pGroup createEmptyInstance() => create();
+  static $pb.PbList<WifiP2pGroup> createRepeated() =>
+      $pb.PbList<WifiP2pGroup>();
+  @$core.pragma('dart2js:noInline')
+  static WifiP2pGroup getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<WifiP2pGroup>(create);
+  static WifiP2pGroup _defaultInstance;
+
+  @$pb.TagNumber(1)
+  WifiP2pDevice get owner => $_getN(0);
+  @$pb.TagNumber(1)
+  set owner(WifiP2pDevice v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasOwner() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOwner() => clearField(1);
+  @$pb.TagNumber(1)
+  WifiP2pDevice ensureOwner() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  WifiP2pDeviceList get clientList => $_getN(1);
+  @$pb.TagNumber(2)
+  set clientList(WifiP2pDeviceList v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasClientList() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearClientList() => clearField(2);
+  @$pb.TagNumber(2)
+  WifiP2pDeviceList ensureClientList() => $_ensure(1);
+}
+
 class ConnectionChange extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i =
       $pb.BuilderInfo('ConnectionChange', createEmptyInstance: create)
@@ -255,6 +314,8 @@ class ConnectionChange extends $pb.GeneratedMessage {
             protoName: 'wifiP2pInfo', subBuilder: WifiP2pInfo.create)
         ..aOM<NetworkInfo>(2, 'networkInfo',
             protoName: 'networkInfo', subBuilder: NetworkInfo.create)
+        ..aOM<WifiP2pGroup>(3, 'groupInfo',
+            protoName: 'groupInfo', subBuilder: WifiP2pGroup.create)
         ..hasRequiredFields = false;
 
   ConnectionChange._() : super();
@@ -306,6 +367,20 @@ class ConnectionChange extends $pb.GeneratedMessage {
   void clearNetworkInfo() => clearField(2);
   @$pb.TagNumber(2)
   NetworkInfo ensureNetworkInfo() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  WifiP2pGroup get groupInfo => $_getN(2);
+  @$pb.TagNumber(3)
+  set groupInfo(WifiP2pGroup v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasGroupInfo() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGroupInfo() => clearField(3);
+  @$pb.TagNumber(3)
+  WifiP2pGroup ensureGroupInfo() => $_ensure(2);
 }
 
 class WifiP2pInfo extends $pb.GeneratedMessage {

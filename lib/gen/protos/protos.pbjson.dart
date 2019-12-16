@@ -97,6 +97,28 @@ const WifiP2pDeviceList$json = const {
   ],
 };
 
+const WifiP2pGroup$json = const {
+  '1': 'WifiP2pGroup',
+  '2': const [
+    const {
+      '1': 'owner',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.WifiP2pDevice',
+      '10': 'owner'
+    },
+    const {
+      '1': 'clientList',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.WifiP2pDeviceList',
+      '10': 'clientList'
+    },
+  ],
+};
+
 const ConnectionChange$json = const {
   '1': 'ConnectionChange',
   '2': const [
@@ -115,6 +137,14 @@ const ConnectionChange$json = const {
       '5': 11,
       '6': '.NetworkInfo',
       '10': 'networkInfo'
+    },
+    const {
+      '1': 'groupInfo',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.WifiP2pGroup',
+      '10': 'groupInfo'
     },
   ],
 };

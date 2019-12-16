@@ -14,6 +14,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.NetworkInfo
+import android.net.wifi.p2p.WifiP2pGroup
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pInfo
 import android.net.wifi.p2p.WifiP2pManager
@@ -49,6 +50,7 @@ class WiFiDirectBroadcastReceiver(private val manager: WifiP2pManager,
     private fun onConnectionChanged(intent: Intent) {
         val p2pInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_INFO) as WifiP2pInfo
         val networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO) as NetworkInfo
+        val groupInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_GROUP) as WifiP2pGroup
 
         manager.let { manager ->
 
@@ -74,7 +76,7 @@ class WiFiDirectBroadcastReceiver(private val manager: WifiP2pManager,
             }
         }
 
-        connectionChangedSink?.success(ProtoHelper.create(p2pInfo, networkInfo).toByteArray())
+        connectionChangedSink?.success(ProtoHelper.create(p2pInfo, networkInfo, groupInfo).toByteArray())
     }
 
     private fun onStateChanged(intent: Intent) {

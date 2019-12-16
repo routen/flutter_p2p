@@ -37,9 +37,15 @@ message WifiP2pDeviceList {
     repeated WifiP2pDevice devices = 1;
 }
 
+message WifiP2pGroup {
+     WifiP2pDevice owner = 1;
+     WifiP2pDeviceList clientList = 2;
+}
+
 message ConnectionChange {
     WifiP2pInfo wifiP2pInfo = 1;
     NetworkInfo networkInfo = 2;
+    WifiP2pGroup groupInfo = 3;
 }
 
 message WifiP2pInfo {
